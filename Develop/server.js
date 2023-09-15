@@ -9,15 +9,24 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 // Define your routes here
+
+// Serve the index.html file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Serve the notes.html file
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'notes.html'));
 });
 
-// ... Other routes ...
+// Define your API routes here
+app.get('/api/notes', (req, res) => {
+  // Your API logic for fetching notes goes here
+  // Return the notes as JSON
+  const notes = [{ title: 'Note 1', text: 'This is note 1' }, { title: 'Note 2', text: 'This is note 2' }];
+  res.json(notes);
+});
 
 // Start the server
 app.listen(PORT, () => {
